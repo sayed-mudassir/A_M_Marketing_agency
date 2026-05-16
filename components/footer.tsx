@@ -51,7 +51,7 @@ export function Footer() {
                     alt="AM Marketing Co Logo"
                     fill
 
-                    className="object-contain rounded-lg border-border scale-100"
+                    className="object-contain rounded-lg border-border scale-115"
 
                     priority
                   />

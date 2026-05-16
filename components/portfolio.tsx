@@ -20,7 +20,7 @@ const projects = [
     title: 'E-Commerce Platform',
     description: 'Scalable e-commerce solution with advanced inventory management and seamless checkout experience.',
     fullDescription: 'Developed a high-performance e-commerce platform handling 10,000+ daily transactions with advanced inventory management, real-time analytics, and a 99.9% uptime guarantee.',
-    image: '/projects/ecommerce.jpg',
+    image: '/ecom.jpeg',
     tags: ['Next.js', 'Shopify', 'Node.js', 'PostgreSQL'],
     category: 'Development',
   },
@@ -29,7 +29,7 @@ const projects = [
     title: 'Healthcare Mobile App',
     description: 'Patient management app with telemedicine features and secure health record access.',
     fullDescription: 'Created a HIPAA-compliant healthcare application enabling remote consultations, appointment scheduling, and secure access to medical records, serving over 50,000 patients.',
-    image: '/projects/healthcare.jpg',
+    image: '/healthcareapp2.jpeg',
     tags: ['React Native', 'Node.js', 'MongoDB', 'AWS'],
     category: 'App Development',
   },
@@ -38,7 +38,7 @@ const projects = [
     title: 'SaaS Marketing Suite',
     description: 'All-in-one marketing automation platform with email campaigns and analytics.',
     fullDescription: 'Built an enterprise marketing automation platform featuring email campaign management, A/B testing, customer journey mapping, and comprehensive analytics dashboard.',
-    image: '/projects/saas.jpg',
+    image: '/saas.png',
     tags: ['React', 'Python', 'Django', 'Redis'],
     category: 'Web Development',
   },
@@ -47,7 +47,7 @@ const projects = [
     title: 'Real Estate Portal',
     description: 'Property listing platform with virtual tours and AI-powered recommendations.',
     fullDescription: 'Developed a next-generation real estate platform with 3D virtual property tours, machine learning-based recommendations, and integrated mortgage calculators.',
-    image: '/projects/realestate.jpg',
+    image: '/realestate2.jpeg',
     tags: ['Next.js', 'Three.js', 'Spring Boot', 'PostgreSQL'],
     category: 'Development',
   },
@@ -56,7 +56,7 @@ const projects = [
     title: 'Brand Identity - TechStartup',
     description: 'Complete brand redesign including logo, visual identity, and brand guidelines.',
     fullDescription: 'Executed a comprehensive brand transformation including logo design, color palette, typography system, and 50-page brand guidelines document.',
-    image: '/projects/branding.jpg',
+    image: '/brand.jpeg',
     tags: ['Branding', 'UI/UX', 'Figma', 'Illustrator'],
     category: 'Branding',
   },
@@ -115,10 +115,10 @@ export function Portfolio() {
                     className="object-contain"
                     priority
                   />
-                  <div className="absolute inset-0 flex items-center justify-center">
+                  {/*<div className="absolute inset-0 flex items-center justify-center">
                     <span className="text-5xl font-bold text-foreground/10">{project.id}</span>
                   </div>
-                  
+                  */}
                   {/* Overlay */}
                   <div
                     className={cn(

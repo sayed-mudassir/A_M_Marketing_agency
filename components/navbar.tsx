@@ -11,7 +11,7 @@ const navLinks = [
   { href: '#portfolio', label: 'Portfolio' },
   { href: '#case-studies', label: 'Case Studies' },
   { href: '#about', label: 'About' },
-  { href: '#pricing', label: 'Pricing' },
+  // { href: '#pricing', label: 'Pricing' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -44,7 +44,7 @@ export function Navbar() {
             src="/logo.jpeg"
             alt="AM Marketing Co Logo"
             fill
-            className="object-contain rounded-lg"
+            className="object-contain rounded-lg scale-110"
 
             priority
           />
@@ -98,7 +98,7 @@ export function Navbar() {
       {/* Mobile Menu */}
       <div
         className={cn(
-          'glass absolute left-0 right-0 top-full overflow-hidden transition-all duration-300 lg:hidden',
+          'left-0 right-0 bg-black/40 backdrop-blur-md top-full overflow-hidden transition-all duration-300 lg:hidden',
           isMobileMenuOpen ? 'max-h-96 border-b border-border' : 'max-h-0'
         )}
       >

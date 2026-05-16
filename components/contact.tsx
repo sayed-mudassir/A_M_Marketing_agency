@@ -16,26 +16,50 @@ export function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  e.preventDefault()
+  console.log('1');
+  try {
     setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
+
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+
+    const data = await response.json()
+
+    if (data.success) {
+      setIsSubmitted(true)
+
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: '',
+      })
+
+      setTimeout(() => {
+        setIsSubmitted(false)
+      }, 5000)
+    }
+  } catch (error) {
+    console.error(error)
+    alert('Something went wrong')
+  } finally {
     setIsSubmitting(false)
-    setIsSubmitted(true)
-    setFormData({ name: '', email: '', phone: '', service: '', message: '' })
-    
-    // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000)
   }
+}
 
   const contactInfo = [
     {
       icon: Phone,
       label: 'Phone',
-      value: '+91 98765 43210',
-      href: 'tel:+919876543210',
+      value: '+91 75250 06923',
+      href: 'tel:+917525006923',
     },
     {
       icon: Mail,
@@ -46,7 +70,7 @@ export function Contact() {
     {
       icon: MapPin,
       label: 'Office',
-      value: 'Mumbai, India',
+      value: 'Allahabad, Uttar Pardesh, India',
       href: '#',
     },
   ]
@@ -225,7 +249,7 @@ export function Contact() {
             {/* WhatsApp CTA */}
             <div className="mt-8">
               <a
-                href="https://wa.me/919876543210"
+                href="https://wa.me/917525006923"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass group flex items-center justify-between rounded-2xl p-6 transition-all duration-300 hover:glow-purple"

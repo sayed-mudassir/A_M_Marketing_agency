@@ -19,10 +19,10 @@ export function MobileNav() {
   useEffect(() => {
     const handleScroll = () => {
       // Show nav after scrolling past hero
-      setIsVisible(window.scrollY > 500)
+      setIsVisible(window.scrollY > 20)
 
       // Determine active section
-      const sections = ['contact', 'portfolio', 'services']
+      const sections = ['Home',  'services', 'portfolio', 'contact']
       for (const section of sections) {
         const element = document.getElementById(section)
         if (element) {
