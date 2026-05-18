@@ -9,7 +9,7 @@ import { Pricing } from '@/components/pricing'
 import { Contact } from '@/components/contact'
 import { Footer } from '@/components/footer'
 import { MobileNav } from '@/components/mobile-nav'
-import { Analytics } from "@vercel/analytics/next"
+// import { Analytics } from "@vercel/analytics/next"
 
 export default function Home() {
   return (
@@ -25,7 +25,7 @@ export default function Home() {
       <Contact />
       <Footer />
       <MobileNav />
-      <Analytics/>
+      {/*<Analytics/>*/}
     </main>
   )
 }

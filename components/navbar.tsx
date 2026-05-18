@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { ThemeToggle } from './theme-toggle'
 
 const navLinks = [
   { href: '#services', label: 'Services' },
@@ -70,6 +71,7 @@ export function Navbar() {
 
         {/* CTA Buttons */}
         <div className="hidden items-center gap-3 lg:flex">
+          {/*<ThemeToggle />*/}
           <Link
             href="#contact"
             className="px-5 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
@@ -86,6 +88,7 @@ export function Navbar() {
         </div>
 
         {/* Mobile Menu Button */}
+        <ThemeToggle />
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="rounded-lg p-2 text-foreground transition-colors hover:bg-secondary lg:hidden"
@@ -93,9 +96,11 @@ export function Navbar() {
         >
           {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
+
       </nav>
 
       {/* Mobile Menu */}
+
       <div
         className={cn(
           'left-0 right-0 bg-black/40 backdrop-blur-md top-full overflow-hidden transition-all duration-300 lg:hidden',

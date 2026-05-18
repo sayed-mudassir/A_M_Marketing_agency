@@ -26,11 +26,11 @@ const footerLinks = {
 }
 
 const socialLinks = [
-  { icon: Facebook, href: '#', label: 'Facebook' },
+  { icon: Facebook, href: 'https://www.facebook.com/share/1TTxoHJ2Zg/', label: 'Facebook' },
   { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Youtube, href: '#', label: 'YouTube' },
+  { icon: Instagram, href: 'https://www.instagram.com/am_marketing_co_?igsh=bjd6dWM0cWJ4NzNw', label: 'Instagram' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/company/a-m-marketing-co/', label: 'LinkedIn' },
+  // { icon: Youtube, href: '#', label: 'YouTube' },
 ]
 
 export function Footer() {
