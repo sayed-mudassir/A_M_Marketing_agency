@@ -15,13 +15,13 @@ const footerLinks = {
     { label: 'About Us', href: '#about' },
     { label: 'Portfolio', href: '#portfolio' },
     { label: 'Case Studies', href: '#case-studies' },
-    { label: 'Pricing', href: '#pricing' },
+    // { label: 'Pricing', href: '#pricing' },
     { label: 'Contact', href: '#contact' },
   ],
   legal: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Policy', href: '#' },
+    { label: 'Privacy Policy', href: '/privacy-policy' },
+    { label: 'Terms of Service', href: '/terms-of-service' },
+    { label: 'Cookie Policy', href: '/privacy-policy/#cookies' },
   ],
 }
 
