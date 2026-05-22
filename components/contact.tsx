@@ -30,6 +30,7 @@ export function Contact() {
     })
 
     const data = await response.json()
+    console.log(data)
 
     if (data.success) {
       setIsSubmitted(true)
@@ -64,13 +65,13 @@ export function Contact() {
     {
       icon: Mail,
       label: 'Email',
-      value: 'hello@ammarketing.co',
-      href: 'mailto:hello@ammarketing.co',
+      value: 'ammarketingco27@gmail.com',
+      href: 'mailto:ammarketingco27@gmail.com',
     },
     {
       icon: MapPin,
       label: 'Office',
-      value: 'Allahabad, Uttar Pardesh, India',
+      value: 'India',
       href: '#',
     },
   ]

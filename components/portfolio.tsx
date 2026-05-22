@@ -1,9 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { ExternalLink, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { ScrollAnimation } from './scroll-animation'
 import Image from 'next/image'
+
 
 const projects = [
   {
@@ -70,67 +73,70 @@ export function Portfolio() {
     <section id="portfolio" className="relative bg-secondary/30 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
-        <div className="mx-auto max-w-3xl text-center">
+        <ScrollAnimation variant="fadeInUp" className="mx-auto max-w-3xl text-center mb-16">
           <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
             Our Work
           </span>
           <h2 className="mt-6 text-balance text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
             <span className="text-foreground">Projects That Speak</span>
             <br />
-            <span className="gradient-text">For Themselves</span>
+            <span className="gradient-text">Volumes</span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
-            A showcase of our finest work across development, design, and digital marketing.
+            Our recent work showcasing innovation and excellence.
           </p>
-        </div>
+        </ScrollAnimation>
 
-        {/* Projects grid */}
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Projects Grid */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.1 }
+            }
+          }}
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+        >
           {projects.map((project) => {
             const isHovered = hoveredId === project.id
-
             return (
-              <div
+              <motion.div
                 key={project.id}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                }}
                 onMouseEnter={() => setHoveredId(project.id)}
                 onMouseLeave={() => setHoveredId(null)}
                 onClick={() => setSelectedProject(project)}
-                className={cn(
-                  'glass-card group relative cursor-pointer overflow-hidden rounded-2xl transition-all duration-500',
-                  isHovered && 'glow-purple scale-[1.02]'
-                )}
+                className="group relative overflow-hidden rounded-xl bg-card shadow-lg transition-all duration-300 cursor-pointer hover:shadow-xl hover:shadow-primary/20"
               >
                 {/* Image placeholder */}
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <div
-                    className={cn(
-                      'absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 transition-all duration-500',
-                      isHovered && 'scale-110'
-                    )}
-                  />
-                  <Image
+                <div className="relative aspect-video bg-gradient-to-br from-primary/20 to-accent/20 overflow-hidden">
+                   <Image
                     src={project.image}
                     alt="AM Marketing Co Logo"
                     fill
-                    className="object-contain"
+                    className="object-contain scale-130 "
                     priority
                   />
-                  {/*<div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-5xl font-bold text-foreground/10">{project.id}</span>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    {/*<div className="text-5xl opacity-10">{project.id}</div>*/}
                   </div>
-                  */}
-                  {/* Overlay */}
-                  <div
-                    className={cn(
-                      'absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm transition-opacity duration-300',
-                      isHovered ? 'opacity-100' : 'opacity-0'
-                    )}
+                  <motion.div
+                    animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 flex items-center justify-center bg-black/40"
                   >
-                    <div className="flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background">
+                    <button className="flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background">
                       <span>View Project</span>
                       <ExternalLink className="h-4 w-4" />
-                    </div>
-                  </div>
+                    </button>
+                  </motion.div>
                 </div>
 
                 {/* Content */}
@@ -148,41 +154,49 @@ export function Portfolio() {
                   {/* Tags */}
                   <div className="mt-4 flex flex-wrap gap-2">
                     {project.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground"
-                      >
+                      <span key={tag} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             )
           })}
-        </div>
+        </motion.div>
       </div>
 
-      {/* Project Modal */}
+      {/* Modal */}
       {selectedProject && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-md p-4"
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           onClick={() => setSelectedProject(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
         >
-          <div
-            className="glass relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl p-8"
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
+            className="relative max-h-[90vh] max-w-2xl overflow-y-auto rounded-2xl bg-card"
           >
-            {/* Close button */}
             <button
               onClick={() => setSelectedProject(null)}
-              className="absolute right-4 top-4 rounded-full bg-secondary p-2 text-foreground transition-colors hover:bg-secondary/80"
+              className="absolute z-10 right-4 top-4 rounded-lg bg-secondary p-2 transition-colors hover:bg-foreground/20"
             >
-              <X className="h-5 w-5" />
+              <X className="h-6 w-6" />
             </button>
 
+
+
+            {/*<div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+              <div className="text-7xl opacity-10">{selectedProject.id}</div>
+            </div>
+*/}
             {/* Image placeholder */}
-            <div className="relative aspect-video overflow-hidden rounded-2xl">
+            <div className="z-1 relative aspect-video overflow-hidden rounded-2xl">
 
               <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30" />
               <div className="absolute inset-0 flex items-center justify-center">
@@ -190,7 +204,7 @@ export function Portfolio() {
                     src={selectedProject.image}
                     alt={selectedProject.title}
                     fill
-                    className="object-cover transition-all duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 group-hover:brightness-110"
+                    className="object-cover transition-all duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-10 group-hover:brightness-110"
                     priority
                   />
                 <span className="text-7xl font-bold text-foreground/10">{selectedProject.id}</span>
@@ -199,42 +213,27 @@ export function Portfolio() {
               </div>
             </div>
 
-            {/* Content */}
-            <div className="mt-6">
-              <div className="text-sm font-medium uppercase tracking-wider text-primary">
+            <div className="p-8">
+              <div className="mb-2 text-xs font-medium uppercase tracking-wider text-primary">
                 {selectedProject.category}
               </div>
-              <h3 className="mt-2 text-2xl font-bold text-foreground">
+              <h2 className="text-3xl font-bold text-foreground">
                 {selectedProject.title}
-              </h3>
-              <p className="mt-4 leading-relaxed text-muted-foreground">
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
                 {selectedProject.fullDescription}
               </p>
 
-              {/* Tags */}
               <div className="mt-6 flex flex-wrap gap-2">
                 {selectedProject.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-muted-foreground"
-                  >
+                  <span key={tag} className="rounded-full bg-secondary px-3 py-1 text-sm font-medium text-muted-foreground">
                     {tag}
                   </span>
                 ))}
               </div>
-
-              {/* CTA */}
-              <div className="mt-8 flex gap-4">
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="flex-1 rounded-lg bg-gradient-to-r from-primary to-accent px-6 py-3 text-center font-semibold text-primary-foreground transition-all duration-300 hover:shadow-lg hover:shadow-primary/30"
-                >
-                  Start Similar Project
-                </button>
-              </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </section>
   )

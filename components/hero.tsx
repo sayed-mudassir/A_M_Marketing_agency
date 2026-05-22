@@ -1,8 +1,9 @@
- 'use client'
+'use client'
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Play } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -35,7 +36,7 @@ export function Hero() {
             left: `${mousePosition.x * 60 + 10}%`,
             top: `${mousePosition.y * 40 + 10}%`,
             transform: 'translate(-50%, -50%)',
-            transition: 'left 0.25s ease-out, top 0.15s ease-out',
+            transition: 'left 0.8s ease-out, top 0.8s ease-out',
           }}
         />
         <div
@@ -44,7 +45,7 @@ export function Hero() {
             left: `${100 - mousePosition.x * 60}%`,
             top: `${100 - mousePosition.y * 40}%`,
             transform: 'translate(-50%, -50%)',
-            transition: 'left 0.25s ease-out, top 0.15s ease-out',
+            transition: 'left 1s ease-out, top 1s ease-out',
             animationDelay: '1.5s',
           }}
         />
@@ -119,7 +120,11 @@ export function Hero() {
       {/* Content */}
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-6 pt-24 pb-32 lg:px-8">
         {/* Badge */}
-        <div className="glass-card mb-8 inline-flex items-center gap-2 rounded-full px-4 py-2">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="glass-card mb-8 inline-flex items-center gap-2 rounded-full px-4 py-2">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
@@ -127,25 +132,37 @@ export function Hero() {
           <span className="text-sm font-medium text-muted-foreground">
             Now accepting new projects for 2026
           </span>
-        </div>
+        </motion.div>
 
         {/* Main heading */}
-        <h1 className="text-balance text-center text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-balance text-center text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
           <span className="text-foreground">We Build Digital</span>
           <br />
           <span className="gradient-text">Experiences That Drive</span>
           <br />
           <span className="text-foreground">Real Growth</span>
-        </h1>
+        </motion.h1>
 
         {/* Subheadline */}
-        <p className="mt-8 max-w-2xl text-balance text-center text-lg text-muted-foreground sm:text-xl">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-8 max-w-2xl text-balance text-center text-lg text-muted-foreground sm:text-xl">
           A premium digital agency specializing in software development, stunning web experiences, 
           and high-converting marketing strategies that transform businesses.
-        </p>
+        </motion.p>
 
         {/* CTA Buttons */}
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
           <Link
             href="#contact"
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-primary to-accent px-8 py-4 text-base font-semibold text-primary-foreground transition-all duration-300 hover:shadow-xl hover:shadow-primary/30"
@@ -164,10 +181,14 @@ export function Hero() {
             </div>
             <span>View Our Work</span>
           </Link>
-        </div>
+        </motion.div>
 
         {/* Trust indicators */}
-        <div className="mt-20 flex flex-col items-center gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-20 flex flex-col items-center gap-6">
           <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
             Trusted by industry leaders
           </p>
@@ -178,10 +199,14 @@ export function Hero() {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Stats */}
-        <div className="mt-20 grid grid-cols-2 gap-8 sm:grid-cols-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-20 grid grid-cols-2 gap-8 sm:grid-cols-4">
           {[
             { value: '150+', label: 'Projects Delivered' },
             { value: '98%', label: 'Client Satisfaction' },
@@ -195,7 +220,7 @@ export function Hero() {
               <div className="mt-1 text-sm text-muted-foreground">{stat.label}</div>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* Scroll indicator */}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { 
   Code2, 
   Palette, 
@@ -17,6 +18,7 @@ import {
   ArrowRight
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { ScrollAnimation } from './scroll-animation'
 
 const services = [
   {
@@ -113,7 +115,7 @@ export function Services() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
-        <div className="mx-auto max-w-3xl text-center">
+        <ScrollAnimation variant="fadeInUp" className="mx-auto max-w-3xl text-center">
           <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
             Our Services
           </span>
@@ -126,10 +128,10 @@ export function Services() {
             From concept to execution, we deliver end-to-end digital solutions 
             that transform your business and outpace the competition.
           </p>
-        </div>
+        </ScrollAnimation>
 
         {/* Category filters */}
-        <div className="mt-12 flex flex-wrap justify-center gap-2">
+        <ScrollAnimation variant="scaleIn" className="mt-12 flex flex-wrap justify-center gap-2">
           {categories.map((category) => (
             <button
               key={category}
@@ -144,52 +146,42 @@ export function Services() {
               {category}
             </button>
           ))}
-        </div>
+        </ScrollAnimation>
 
-        {/* Services grid */}
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredServices.map((service, index) => {
+        {/* Services Grid */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1,
+              }
+            }
+          }}
+          className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+        >
+          {filteredServices.map((service, idx) => {
             const Icon = service.icon
-            const isHovered = hoveredIndex === index
-
+            const isHovered = hoveredIndex === idx
             return (
-              <div
+              <motion.div
                 key={service.title}
-                onMouseEnter={() => setHoveredIndex(index)}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                }}
+                onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                className={cn(
-                  'glass-card group relative overflow-hidden rounded-2xl p-6 transition-all duration-500',
-                  isHovered && 'glow-blue scale-[1.02]'
-                )}
+                className="glass-card group relative overflow-hidden rounded-xl p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10"
               >
-                {/* Gradient border on hover */}
-                <div
-                  className={cn(
-                    'absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500',
-                    isHovered && 'opacity-100'
-                  )}
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(96, 165, 250, 0.2), rgba(167, 139, 250, 0.2))',
-                    padding: '1px',
-                  }}
-                />
-
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col h-full">
                   {/* Icon */}
-                  <div
-                    className={cn(
-                      'mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-500',
-                      isHovered
-                        ? 'bg-gradient-to-r from-primary to-accent'
-                        : 'bg-secondary'
-                    )}
-                  >
-                    <Icon
-                      className={cn(
-                        'h-6 w-6 transition-colors duration-500',
-                        isHovered ? 'text-primary-foreground' : 'text-muted-foreground'
-                      )}
-                    />
+                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                    <Icon className="h-6 w-6 text-primary" />
                   </div>
 
                   {/* Content */}
@@ -211,13 +203,16 @@ export function Services() {
                     <ArrowRight className="h-4 w-4" />
                   </div>
                 </div>
-              </div>
+
+                {/* Hover background effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              </motion.div>
             )
           })}
-        </div>
+        </motion.div>
 
         {/* CTA */}
-        <div className="mt-16 text-center">
+        <ScrollAnimation variant="fadeInUp" delay={0.4} className="mt-16 text-center">
           <a
             href="#contact"
             className="group inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-primary to-accent px-8 py-4 text-base font-semibold text-primary-foreground transition-all duration-300 hover:shadow-xl hover:shadow-primary/30"
@@ -225,7 +220,7 @@ export function Services() {
             <span>Start Your Project</span>
             <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
-        </div>
+        </ScrollAnimation>
       </div>
     </section>
   )
