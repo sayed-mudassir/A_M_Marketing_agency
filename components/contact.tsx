@@ -1,80 +1,80 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Send, Phone, Mail, MapPin, MessageCircle } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { useState } from "react";
+import { Send, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: '',
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  console.log('1');
-  try {
-    setIsSubmitting(true)
+    e.preventDefault();
+    console.log("1");
+    try {
+      setIsSubmitting(true);
 
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    const data = await response.json()
-    console.log(data)
+      const data = await response.json();
+      console.log(data);
 
-    if (data.success) {
-      setIsSubmitted(true)
+      if (data.success) {
+        setIsSubmitted(true);
 
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: '',
-        message: '',
-      })
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          service: "",
+          message: "",
+        });
 
-      setTimeout(() => {
-        setIsSubmitted(false)
-      }, 5000)
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    } finally {
+      setIsSubmitting(false);
     }
-  } catch (error) {
-    console.error(error)
-    alert('Something went wrong')
-  } finally {
-    setIsSubmitting(false)
-  }
-}
+  };
 
   const contactInfo = [
     {
       icon: Phone,
-      label: 'Phone',
-      value: '+91 75250 06923',
-      href: 'tel:+917525006923',
+      label: "Phone",
+      value: "+91 75250 06923",
+      href: "tel:+917525006923",
     },
     {
       icon: Mail,
-      label: 'Email',
-      value: 'ammarketingco27@gmail.com',
-      href: 'mailto:ammarketingco27@gmail.com',
+      label: "Email",
+      value: "ammarketingco27@gmail.com",
+      href: "mailto:ammarketingco27@gmail.com",
     },
     {
       icon: MapPin,
-      label: 'Office',
-      value: 'India',
-      href: '#',
+      label: "Office",
+      value: "India",
+      href: "#",
     },
-  ]
+  ];
 
   return (
     <section id="contact" className="relative bg-background py-24 lg:py-32">
@@ -96,23 +96,29 @@ export function Contact() {
             <span className="gradient-text">Digital Journey</span>
           </h2>
           <p className="mt-6 text-lg text-muted-foreground">
-            Ready to transform your business? Get in touch with us today and let&apos;s discuss 
-            how we can help you achieve your goals.
+            Ready to transform your business? Get in touch with us today and
+            let&apos;s discuss how we can help you achieve your goals.
           </p>
         </div>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-2">
           {/* Contact Form */}
           <div className="glass rounded-3xl p-8 lg:p-10">
-            <h3 className="text-xl font-semibold text-foreground">Send us a message</h3>
+            <h3 className="text-xl font-semibold text-foreground">
+              Send us a message
+            </h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Fill out the form below and we&apos;ll get back to you within 24 hours.
+              Fill out the form below and we&apos;ll get back to you within 24
+              hours.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-6">
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="name" className="mb-2 block text-sm font-medium text-foreground">
+                  <label
+                    htmlFor="name"
+                    className="mb-2 block text-sm font-medium text-foreground"
+                  >
                     Full Name
                   </label>
                   <input
@@ -120,13 +126,18 @@ export function Contact() {
                     id="name"
                     required
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                     className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                     placeholder="John Doe"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="mb-2 block text-sm font-medium text-foreground">
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block text-sm font-medium text-foreground"
+                  >
                     Email Address
                   </label>
                   <input
@@ -134,7 +145,9 @@ export function Contact() {
                     id="email"
                     required
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                     placeholder="john@example.com"
                   />
@@ -143,32 +156,44 @@ export function Contact() {
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="phone" className="mb-2 block text-sm font-medium text-foreground">
+                  <label
+                    htmlFor="phone"
+                    className="mb-2 block text-sm font-medium text-foreground"
+                  >
                     Phone Number
                   </label>
                   <input
                     type="tel"
                     id="phone"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
                     className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                     placeholder="+91 98765 43210"
                   />
                 </div>
                 <div>
-                  <label htmlFor="service" className="mb-2 block text-sm font-medium text-foreground">
+                  <label
+                    htmlFor="service"
+                    className="mb-2 block text-sm font-medium text-foreground"
+                  >
                     Service Interested In
                   </label>
                   <select
                     id="service"
                     value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, service: e.target.value })
+                    }
                     className="w-full rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                   >
                     <option value="">Select a service</option>
                     <option value="web-development">Web Development</option>
                     <option value="app-development">App Development</option>
-                    <option value="performance-marketing">Performance Marketing</option>
+                    <option value="performance-marketing">
+                      Performance Marketing
+                    </option>
                     <option value="social-media">Social Media Marketing</option>
                     <option value="seo">SEO</option>
                     <option value="branding">Branding</option>
@@ -178,7 +203,10 @@ export function Contact() {
               </div>
 
               <div>
-                <label htmlFor="message" className="mb-2 block text-sm font-medium text-foreground">
+                <label
+                  htmlFor="message"
+                  className="mb-2 block text-sm font-medium text-foreground"
+                >
                   Your Message
                 </label>
                 <textarea
@@ -186,7 +214,9 @@ export function Contact() {
                   rows={5}
                   required
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
                   className="w-full resize-none rounded-lg border border-border bg-secondary/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                   placeholder="Tell us about your project..."
                 />
@@ -196,10 +226,10 @@ export function Contact() {
                 type="submit"
                 disabled={isSubmitting}
                 className={cn(
-                  'group flex w-full items-center justify-center gap-2 rounded-lg px-6 py-4 text-base font-semibold transition-all duration-300',
+                  "group flex w-full items-center justify-center gap-2 rounded-lg px-6 py-4 text-base font-semibold transition-all duration-300",
                   isSubmitting
-                    ? 'bg-muted text-muted-foreground cursor-not-allowed'
-                    : 'bg-gradient-to-r from-primary to-accent text-primary-foreground hover:shadow-lg hover:shadow-primary/30'
+                    ? "bg-muted text-muted-foreground cursor-not-allowed"
+                    : "bg-gradient-to-r from-primary to-accent text-primary-foreground hover:shadow-lg hover:shadow-primary/30",
                 )}
               >
                 {isSubmitting ? (
@@ -217,7 +247,8 @@ export function Contact() {
 
               {isSubmitted && (
                 <div className="rounded-lg bg-primary/10 p-4 text-center text-sm text-primary">
-                  Thank you! Your message has been sent successfully. We&apos;ll get back to you soon.
+                  Thank you! Your message has been sent successfully. We&apos;ll
+                  get back to you soon.
                 </div>
               )}
             </form>
@@ -228,22 +259,26 @@ export function Contact() {
             {/* Info cards */}
             <div className="space-y-6">
               {contactInfo.map((info) => {
-                const Icon = info.icon
+                const Icon = info.icon;
                 return (
                   <a
                     key={info.label}
                     href={info.href}
-                    className="glass-card group flex items-center gap-4 rounded-2xl p-6 transition-all duration-300 hover:glow-blue"
+                    className="glass-card group flex flex-col items-center text-center sm:flex-row sm:text-left gap-4 rounded-2xl p-6"
                   >
                     <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 transition-all duration-300 group-hover:from-primary group-hover:to-accent">
                       <Icon className="h-6 w-6 text-primary transition-colors duration-300 group-hover:text-primary-foreground" />
                     </div>
                     <div>
-                      <div className="text-sm text-muted-foreground">{info.label}</div>
-                      <div className="text-lg font-semibold text-foreground">{info.value}</div>
+                      <div className="text-sm text-muted-foreground">
+                        {info.label}
+                      </div>
+                      <div className="text-lg font-semibold text-foreground">
+                        {info.value}
+                      </div>
                     </div>
                   </a>
-                )
+                );
               })}
             </div>
 
@@ -260,8 +295,12 @@ export function Contact() {
                     <MessageCircle className="h-7 w-7 text-primary-foreground" />
                   </div>
                   <div>
-                    <div className="text-lg font-semibold text-foreground">Chat on WhatsApp</div>
-                    <div className="text-sm text-muted-foreground">Get instant response</div>
+                    <div className="text-lg font-semibold text-foreground">
+                      Chat on WhatsApp
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Get instant response
+                    </div>
                   </div>
                 </div>
                 <div className="rounded-full bg-[#25D366] p-3">
@@ -272,7 +311,9 @@ export function Contact() {
 
             {/* Working hours */}
             <div className="glass-card mt-8 rounded-2xl p-6">
-              <h4 className="text-lg font-semibold text-foreground">Working Hours</h4>
+              <h4 className="text-lg font-semibold text-foreground">
+                Working Hours
+              </h4>
               <div className="mt-4 space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Monday - Friday</span>
@@ -292,5 +333,5 @@ export function Contact() {
         </div>
       </div>
     </section>
-  )
+  );
 }

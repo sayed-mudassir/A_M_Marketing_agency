@@ -118,6 +118,7 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
+          
           <div className="mt-4 flex flex-col gap-2">
             <Link
               href="#contact"
